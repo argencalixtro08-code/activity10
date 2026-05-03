@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<!-- Chosen Municipality: Malangas, Zamboanga Sibugay, Philippines -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malangas, Zamboanga Sibugay — Emerald of the South</title>
+  <meta name="description" content="Discover Malangas — a vibrant municipality nestled in lush rolling hills and rivers of Zamboanga Sibugay, Philippines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===========================
+       COLOR PALETTE & THEME
+    =========================== */
+    :root {
+      --primary:        #1a5c38;   /* Deep emerald green */
+      --primary-light:  #2a7a4c;
+      --secondary:      #d4a017;   /* Warm amber/gold */
+      --accent:         #3a9ebd;   /* Sky blue */
+      --bg:             #f7f9f5;   /* Soft off-white green-tint */
+      --card-bg:        #eef2eb;   /* Slightly deeper card bg */
+      --text:           #1a2e1e;   /* Dark green-black */
+      --muted:          #5a7060;   /* Muted green-gray */
+      --border:         #d0ddd0;
+      --white:          #ffffff;
+      --radius-card:    1.5rem;
+      --radius-pill:    9999px;
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+      padding: 1.5rem 0;
+    }
+    #navbar.scrolled {
+      background: rgba(247, 249, 245, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      box-shadow: 0 1px 12px rgba(0,0,0,0.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 110;
+      position: relative;
+    }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      transition: color 0.3s;
+    }
+    #navbar.scrolled .nav-logo-text { color: var(--text); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      transition: color 0.2s;
+      position: relative;
+      padding: 0.3rem 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--white);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a.active { font-weight: 700; }
+    #navbar.scrolled .nav-links a {
+      color: var(--muted);
+    }
+    #navbar.scrolled .nav-links a:hover { color: var(--primary); }
+    #navbar.scrolled .nav-links a::after { background: var(--primary); }
+    #navbar.scrolled .nav-links a.active { color: var(--primary); }
+
+    .nav-cta {
+      background: var(--secondary);
+      color: var(--text);
+      padding: 0.6rem 1.5rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 700;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      box-shadow: 0 4px 12px rgba(212,160,23,0.25);
+    }
+    .nav-cta:hover {
+      transform: scale(1.05);
+      background: #c0900f;
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 110;
+      position: relative;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    #navbar.scrolled .nav-hamburger span { background: var(--text); }
+    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background: var(--text); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background: var(--text); }
+
+    /* Mobile overlay menu */
+    .nav-mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 105;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .nav-mobile-overlay.open {
+      display: flex;
+      opacity: 1;
+      pointer-events: all;
+    }
+    .nav-mobile-overlay a {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .nav-mobile-overlay a:hover,
+    .nav-mobile-overlay a.active { color: var(--primary); }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #home {
+      position: relative;
+      height: 100dvh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    /* ===========================
+       IMAGES CONFIGURATION
+       Change image paths below to update site images
+    =========================== */
+    .hero-bg img { object-position: center; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.58) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s 0.2s forwards;
+    }
+    .hero-eyebrow {
+      color: var(--secondary);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      drop-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, var(--white), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-weight: 500;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+      padding: 1rem 2rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 24px rgba(26,92,56,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--primary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(26,92,56,0.4);
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      padding: 1rem 2rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.22); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      animation: bounce 2s infinite;
+    }
+    .scroll-indicator a {
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .scroll-indicator a:hover { color: var(--white); }
+    .scroll-indicator svg { width: 20px; height: 20px; }
+
+    /* ===========================
+       SECTION SHARED STYLES
+    =========================== */
+    section { padding: 6rem 0; }
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .section-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .section-badge.green {
+      background: rgba(26,92,56,0.1);
+      color: var(--primary);
+    }
+    .section-badge.green .dot { background: var(--primary); }
+    .section-badge.amber {
+      background: rgba(212,160,23,0.12);
+      color: #a07010;
+    }
+    .section-badge.amber .dot { background: var(--secondary); }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-lead {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .reveal.from-left { transform: translateX(-32px); }
+    .reveal.from-right { transform: translateX(32px); }
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(26,92,56,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    #about::after {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212,160,23,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image-frame {
+      aspect-ratio: 4/5;
+      border-radius: 1.5rem 6rem 1.5rem 6rem;
+      overflow: hidden;
+      border: 8px solid var(--white);
+      box-shadow: 0 24px 64px rgba(26,92,56,0.15);
+    }
+    .about-quote-card {
+      position: absolute;
+      bottom: -2.5rem;
+      right: -2.5rem;
+      background: var(--primary);
+      color: var(--white);
+      padding: 1.5rem 2rem;
+      border-radius: 1.5rem 0 1.5rem 1.5rem;
+      max-width: 260px;
+      box-shadow: 0 12px 32px rgba(26,92,56,0.3);
+    }
+    .about-quote-card p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .stat-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(26,92,56,0.1);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-icon svg { width: 22px; height: 22px; stroke: var(--primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .stat-value {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+	/* ===========================
+   GOVERNMENT SECTION
+=========================== */
+.officials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.official-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  text-align: center;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
+}
+
+.official-card:hover {
+  transform: translateY(-5px);
+}
+
+.official-img {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--primary);
+}
+
+.official-card h3 {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.official-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .officials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+    /* ===========================
+       TOURIST
+    =========================== */
+    #tourist {
+      background: var(--card-bg);
+    }
+    .tourist-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 3.5rem;
+    }
+    .tourist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    .tourist-card {
+      position: relative;
+      height: 420px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+    .tourist-card img {
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tourist-card:hover img { transform: scale(1.1); }
+    .tourist-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+      opacity: 0.8;
+      transition: opacity 0.4s;
+    }
+    .tourist-card:hover .tourist-card-overlay { opacity: 1; }
+    .tourist-card-body {
+      position: absolute; inset: 0;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transform: translateY(16px);
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .tourist-card:hover .tourist-card-body { transform: translateY(0); }
+    .tourist-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .tourist-card-desc {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.5s 0.1s;
+    }
+    .tourist-card:hover .tourist-card-desc { opacity: 1; }
+    .tourist-card-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.5s 0.15s;
+    }
+    .tourist-card:hover .tourist-card-link { opacity: 1; }
+    .tourist-card-link svg { width: 16px; height: 16px; stroke: var(--secondary); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ===========================
+       GALLERY
+    =========================== */
+    #gallery {
+      background: var(--bg);
+    }
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:nth-child(2) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-item::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(26,92,56,0.2);
+      opacity: 0;
+      transition: opacity 0.3s;
+      mix-blend-mode: overlay;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* ===========================
+       CONTACT
+    =========================== */
+    #contact {
+      background: var(--card-bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info-items { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem; }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .contact-icon {
+      width: 56px; height: 56px;
+      border-radius: 1rem;
+      background: rgba(26,92,56,0.1);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    .contact-info-item:hover .contact-icon {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .contact-icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-info-item h4 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .contact-info-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .contact-form-card {
+      background: var(--white);
+      border-radius: var(--radius-card);
+      padding: 2.5rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+      border: 1px solid var(--border);
+    }
+    .contact-form-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 0.75rem;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #a0b0a0; }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26,92,56,0.1);
+    }
+    .form-group textarea { resize: none; }
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(26,92,56,0.25);
+    }
+    .btn-submit:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,92,56,0.3);
+    }
+    .btn-submit svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      z-index: 200;
+      max-width: 360px;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; pointer-events: all; }
+    .toast-title { font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+    .toast-desc { font-size: 0.875rem; color: var(--muted); }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.85);
+      padding: 3.5rem 0 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 2rem;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-logo-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--white);
+    }
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .footer-brand p { font-size: 0.85rem; opacity: 0.65; }
+    .footer-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--secondary); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      opacity: 0.55;
+    }
+
+    /* ===========================
+       ANIMATIONS
+    =========================== */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .tourist-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex; }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+      }
+      .about-quote-card { display: none; }
+
+      .contact-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery-item:nth-child(2) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .footer-top { flex-direction: column; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .tourist-grid { grid-template-columns: 1fr; }
+      .tourist-card { height: 320px; }
+      section { padding: 4rem 0; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+      .gallery-item:nth-child(2) { grid-column: auto; grid-row: auto; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-ghost { text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===========================
+       NAVBAR
+  =========================== -->
+  <header id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo" onclick="scrollTo('home')">
+        <div class="nav-logo-icon"><img src="logo.jpg" alt=""></div>
+        <span class="nav-logo-text">Malangas</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="scrollTo('home')" data-section="home">Home</a></li>
+        <li><a href="#about" onclick="scrollTo('about')" data-section="about">About</a></li>
+        <li><a href="#tourist" onclick="scrollTo('tourist')" data-section="tourist">Tourist</a></li>
+        <li><a href="#gallery" onclick="scrollTo('gallery')" data-section="gallery">Gallery</a></li>
+        <li><a href="#contact" onclick="scrollTo('contact')" data-section="contact">Contact</a></li>
+      </ul>
+
+      <a href="#tourist" onclick="scrollTo('tourist')" class="nav-cta" style="display:flex; align-items:center;">Explore</a>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay -->
+  <nav class="nav-mobile-overlay" id="mobileOverlay">
+    <a href="#home" onclick="mobileNav('home')">Home</a>
+    <a href="#about" onclick="mobileNav('about')">About</a>
+    <a href="#tourist" onclick="mobileNav('tourist')">Tourist</a>
+    <a href="#gallery" onclick="mobileNav('gallery')">Gallery</a>
+    <a href="#contact" onclick="mobileNav('contact')">Contact</a>
+  </nav>
+
+  <!-- ===========================
+       HERO SECTION
+  =========================== -->
+  <section id="home">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">Welcome to MALANGAS</span>
+      <h1 class="hero-title">
+        Discover <br/>
+        <span>Malangas</span>
+      </h1>
+      <p class="hero-desc">
+        A vibrant municipality nestled in lush rolling hills and rivers of Zamboanga Sibugay. Where emerald rice fields, warm community spirit, and untouched natural wonders meet.
+      </p>
+      <div class="hero-actions">
+        <a href="#tourist" onclick="scrollTo('tourist')" class="btn-primary">Show more</a>
+        <a href="#about" onclick="scrollTo('about')" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <a href="#about" onclick="scrollTo('about')">
+        <span>Scroll Down</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-image-wrap reveal from-left">
+          <div class="about-image-frame">
+            <!-- IMAGE: About section image. Replace "malangas.jpg" with your own image path -->
+            <img src="malangas.jpg" alt="Malangas Community" />
+          </div>
+          <div class="about-quote-card">
+            <p>"A town built on resilience and natural bounty."</p>
+          </div>
+        </div>
+
+        <div class="reveal from-right">
+          <div class="section-badge green">
+            <span class="dot"></span> Our History
+          </div>
+          <h2 class="section-title">
+            MALANGAS<br/>Zamboanga Sibugay
+          </h2>
+          <p class="section-lead" style="margin-bottom:1.25rem;">
+            Founded on vibrant civic pride and blessed with rich natural resources, Malangas stands as a testament to the beauty of Mindanao. Originally known for its rich coal deposits, the municipality has blossomed into an agricultural and ecological haven.
+          </p>
+          <p class="section-lead">
+            Our local governance is deeply rooted in transparency, community welfare, and sustainable development — preserving our lush emerald landscapes for generations to come.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="stat-value">Zamboanga Sibugay</div>
+                <div class="stat-label">Province</div>
+              </div>
+            </div>
+            <div class="stat-item">
+			<div class="stat-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              </div>
+              <div>
+                <div class="stat-value">Tropical</div>
+                <div class="stat-label">Climate</div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ===========================
+     GOVERNMENT SECTION
+=========================== -->
+<section id="government">
+  <div class="container">
+    <div class="tourist-header reveal">
+      <div class="section-badge green">
+        <span class="dot"></span> Leadership
+      </div>
+      <h2 class="section-title">Local Officials</h2>
+      <p class="section-lead">
+        Meet the leaders of Malangas who serve the community with dedication and integrity.
+      </p>
+    </div>
+
+    <div class="officials-grid">
+      
+      <!-- MAYOR -->
+      <div class="official-card reveal" style="transition-delay:0.1s;">
+        <div class="official-img">
+          <!-- mayor.jpg -->
+          <img src="mayor.jpg" alt="Mayor">
+        </div>
+        <h3> Hon. Dr. Apple Cabilao Yambao</h3>
+        <p>Municipal Mayor</p>
+      </div>
+
+      <!-- VICE MAYOR -->
+      <div class="official-card reveal" style="transition-delay:0.2s;">
+        <div class="official-img">
+          <!-- vm.jpg -->
+          <img src="vm.jpg" alt="Vice Mayor">
+        </div>
+        <h3>Hon. Marcelo Baquial Jr.</h3>
+        <p>Vice Mayor</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+  <!-- ===========================
+       TOURIST SECTION
+  =========================== -->
+  <section id="tourist">
+    <div class="container">
+      <div class="tourist-header reveal">
+        <div class="section-badge amber">
+          <span class="dot"></span> Explore
+        </div>
+        <h2 class="section-title">Natural Wonders</h2>
+        <p class="section-lead">
+          Experience the untouched beauty of Malangas. From breathtaking beaches to endless emerald fields, adventure awaits at every corner.
+        </p>
+      </div>
+
+      <div class="tourist-grid">
+        <!-- TOURIST CARD 1 -->
+        <!-- IMAGE: Replace "boulevard.jpg" with your own image path -->
+        <div class="tourist-card reveal" style="transition-delay:0.1s;">
+          <img src="boulevard.jpg" alt="Malangas Boulevard" />
+          <div class="tourist-card-overlay"></div>
+          <div class="tourist-card-body">
+            <h3 class="tourist-card-title">Malangas Boulevard</h3>
+            <p class="tourist-card-desc">Malangas Boulevard is a scenic waterfront area where locals and visitors relax and enjoy the sea view.</p>
+            <div class="tourist-card-link">
+              <span>Learn More</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOURIST CARD 2 -->
+        <!-- IMAGE: Replace "forestancia.jpg" with your own image path -->
+        <div class="tourist-card reveal" style="transition-delay:0.2s;">
+          <img src="forestancia.jpg" alt="Forestancia Resort" />
+          <div class="tourist-card-overlay"></div>
+          <div class="tourist-card-body">
+            <h3 class="tourist-card-title">Forestancia Resort</h3>
+            <p class="tourist-card-desc">Forestancia Resort is a nature-inspired resort offering a peaceful environment surrounded by greenery and relaxation spaces.</p>
+            <div class="tourist-card-link">
+              <span>Learn More</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOURIST CARD 3 -->
+        <!-- IMAGE: Replace "aqua.jpg" with your own image path -->
+        <div class="tourist-card reveal" style="transition-delay:0.3s;">
+          <img src="aqua.jpg" alt="Aqua Danz Resort" />
+          <div class="tourist-card-overlay"></div>
+          <div class="tourist-card-body">
+            <h3 class="tourist-card-title">Aqua Danz Resort</h3>
+            <p class="tourist-card-desc">Aqua Danz Resort is a refreshing getaway spot known for swimming pools and family-friendly leisure activities.</p>
+            <div class="tourist-card-link">
+              <span>Learn More</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOURIST CARD 4 -->
+        <!-- IMAGE: Replace "muyong.jpg" with your own image path -->
+        <div class="tourist-card reveal" style="transition-delay:0.4s;">
+          <img src="muyong.jpg" alt="Muyong Island" />
+          <div class="tourist-card-overlay"></div>
+          <div class="tourist-card-body">
+            <h3 class="tourist-card-title">Muyong Island</h3>
+            <p class="tourist-card-desc">Muyong Island is a quiet coastal destination ideal for swimming, sunset viewing, and enjoying a calm beach atmosphere.</p>
+            <div class="tourist-card-link">
+              <span>Learn More</span>
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       GALLERY SECTION
+  =========================== -->
+  <section id="gallery">
+    <div class="container">
+      <div class="gallery-header">
+        <div>
+          <div class="section-badge green reveal">
+            <span class="dot"></span> Visuals
+          </div>
+          <h2 class="section-title reveal" style="transition-delay:0.1s;">GALLERY</h2>
+        </div>
+        <p class="section-lead reveal" style="max-width:380px; transition-delay:0.2s;">
+          A glimpse into the daily life, culture, and breathtaking landscapes of our beloved municipality.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- IMAGE: Gallery photo 1. Replace "muyong.jpg" with your own image path -->
+        <div class="gallery-item reveal" style="transition-delay:0s;">
+          <img src="muyong.jpg" alt="Gallery — Muyong" />
+        </div>
+        <!-- IMAGE: Gallery photo 2 (large). Replace "aqua.jpg" with your own image path -->
+        <div class="gallery-item reveal" style="transition-delay:0.1s;">
+          <img src="aqua.jpg" alt="Gallery — Aqua Danz" />
+        </div>
+        <!-- IMAGE: Gallery photo 3. Replace "boulevard.jpg" with your own image path -->
+        <div class="gallery-item reveal" style="transition-delay:0.2s;">
+          <img src="boulevard.jpg" alt="Gallery — Boulevard" />
+        </div>
+        <!-- IMAGE: Gallery photo 4. Replace "forestancia.jpg" with your own image path -->
+        <div class="gallery-item reveal" style="transition-delay:0.3s;">
+          <img src="forestancia.jpg" alt="Gallery — Forestancia" />
+        </div>
+        <!-- IMAGE: Gallery photo 5. Replace "malangas.jpg" with your own image path -->
+        <div class="gallery-item reveal" style="transition-delay:0.4s;">
+          <img src="malangas.jpg" alt="Gallery — Malangas Municipality" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CONTACT SECTION
+  =========================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="reveal from-left">
+          <div class="section-badge amber">
+            <span class="dot"></span> Connect With Us
+          </div>
+          <h2 class="section-title">Get in Touch</h2>
+          <p class="section-lead" style="max-width:420px;">
+            Whether you're a resident, an investor, or a tourist planning your visit, the Local Government Unit of Malangas is here to assist you.
+          </p>
+
+          <div class="contact-info-items">
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Municipal Hall</h4>
+                <p>Poblacion, Malangas<br/>Zamboanga Sibugay</p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1H6.6a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 16 2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <h4>Phone</h4>
+                <p>+63 (062) 123 4567<br/>Mon–Fri, 8:00 AM – 5:00 PM</p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p>info@malangas.gov.ph<br/>mayor@malangas.gov.ph</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-card reveal from-right" style="transition-delay:0.15s;">
+          <h3>Send a Message</h3>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" required placeholder="Juan" />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" required placeholder="Dela Cruz" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" required placeholder="juan@example.com" />
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea rows="4" required placeholder="How can we help you?"></textarea>
+            </div>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <span id="submitText">Send Message</span>
+              <svg id="submitIcon" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+  =========================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-icon">M</div>
+          <div>
+            <h3>Municipality of Malangas</h3>
+            <p>Zamboanga Sibugay, Philippines</p>
+          </div>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#home" onclick="scrollTo('home')">Home</a></li>
+          <li><a href="#about" onclick="scrollTo('about')">About</a></li>
+          <li><a href="#tourist" onclick="scrollTo('tourist')">Tourist</a></li>
+          <li><a href="#gallery" onclick="scrollTo('gallery')">Gallery</a></li>
+          <li><a href="#contact" onclick="scrollTo('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p id="footerYear">© 2025 Local Government Unit of Malangas. All rights reserved.</p>
+        <p>Designed with pride for the Emerald of the South.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <div class="toast-title">Message Sent Successfully</div>
+    <div class="toast-desc">Thank you for reaching out. We will get back to you soon.</div>
+  </div>
+
+  <script>
+    /* ================================================
+       SMOOTH SCROLL
+    ================================================ */
+    function scrollTo(sectionId) {
+      event.preventDefault();
+      const el = document.getElementById(sectionId);
+      if (el) {
+        window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+      }
+      // Close mobile menu if open
+      closeMobileMenu();
+    }
+
+    /* ================================================
+       NAVBAR: scroll & active section
+    ================================================ */
+    const navbar = document.getElementById('navbar');
+    const navAnchors = document.querySelectorAll('.nav-links a[data-section]');
+    const sections = ['home', 'about', 'tourist', 'gallery', 'contact'];
+
+    window.addEventListener('scroll', () => {
+      // Toggle scrolled style
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+      // Active section highlight
+      let current = sections[0];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 200) current = id;
+      });
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.dataset.section === current);
+      });
+    });
+
+    /* ================================================
+       HAMBURGER / MOBILE MENU
+    ================================================ */
+    const hamburger = document.getElementById('hamburger');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    function toggleMenu() {
+      const open = hamburger.classList.toggle('open');
+      mobileOverlay.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      hamburger.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function mobileNav(sectionId) {
+      event.preventDefault();
+      closeMobileMenu();
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+      }, 100);
+    }
+
+    /* ================================================
+       INTERSECTION OBSERVER — scroll reveal
+    ================================================ */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ================================================
+       CONTACT FORM
+    ================================================ */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const text = document.getElementById('submitText');
+      const icon = document.getElementById('submitIcon');
+
+      btn.disabled = true;
+      text.textContent = 'Sending...';
+      icon.style.display = 'none';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        text.textContent = 'Send Message';
+        icon.style.display = '';
+        e.target.reset();
+        showToast();
+      }, 1500);
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4500);
+    }
+
+    /* ================================================
+       FOOTER YEAR
+    ================================================ */
+    document.getElementById('footerYear').textContent =
+      `© ${new Date().getFullYear()} Local Government Unit of Malangas. All rights reserved.`;
+  </script>
+</body>
+</html>
